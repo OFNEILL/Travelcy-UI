@@ -15,7 +15,7 @@ export default function Bezier(element: any) {
       ctx?.beginPath();
       ctx.strokeStyle = "red";
       ctx?.moveTo(10, 100);
-      ctx.bezierCurveTo(50, 50, 200, 50, 250, 100);
+      ctx.bezierCurveTo(300, 50, 0, 0, 500, 100);
       ctx.stroke();
     }
   }, []);
