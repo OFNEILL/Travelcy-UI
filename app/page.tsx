@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Bezier from "../components/Bezier";
 import Line from "@/components/Line";
-import LineTo from "react-lineto";
+import LineTo, { SteppedLineTo } from "react-lineto";
+import Currency from "@/components/Currency";
 
 export default function Home() {
   const fromRef = useRef(null);
@@ -22,20 +23,26 @@ export default function Home() {
       </div>
       <div className="flex items-start align-start">
         <form
-          className="flex items-start flex-row"
+          className="gap-40 flex flex-row items-center"
           onSubmit={() => {
             console.log(fromValue);
           }}
         >
-          <input
-            className="text-white bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
-            type="number"
-            onChange={(e) => {
-              setFromValue(parseInt(e.target.value));
-            }}
-            placeholder="Enter starting amount"
-            id="fromValue"
-          />
+          <div className="A">
+            <input
+              className="text-white bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
+              type="number"
+              onChange={(e) => {
+                setFromValue(parseInt(e.target.value));
+              }}
+              placeholder="Enter starting amount"
+              id="fromValue"
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Currency currency={"USD"} amount={fromValue} />
+            <Currency currency={"EUR"} amount={fromValue} />
+          </div>
         </form>
       </div>
     </main>
