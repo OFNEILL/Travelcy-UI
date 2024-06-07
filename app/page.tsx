@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Bezier from "../components/Bezier";
+import Line from "@/components/Line";
+import LineTo from "react-lineto";
 
 export default function Home() {
   const fromRef = useRef(null);
+  const [fromValue, setFromValue] = useState(0);
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="lex flex-col items-start w-full">
@@ -19,15 +21,21 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-start align-start">
-        <form className="flex items-start flex-row">
-          <input type="number" placeholder="Enter starting amount" />
-          <canvas
-            width="200"
-            height="300"
+        <form
+          className="flex items-start flex-row"
+          onSubmit={() => {
+            console.log(fromValue);
+          }}
+        >
+          <input
+            className="A"
+            type="number"
+            onChange={(e) => {
+              setFromValue(parseInt(e.target.value));
+            }}
+            placeholder="Enter starting amount"
             id="fromValue"
-            ref={fromRef}
-          ></canvas>
-          <Bezier element="fromValue" />
+          />
         </form>
       </div>
     </main>

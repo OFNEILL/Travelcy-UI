@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import LineTo from "react-lineto";
 
 export default function Line(origin: any, destination: any) {
   // useEffect(() => {
@@ -6,12 +7,9 @@ export default function Line(origin: any, destination: any) {
   //   const end = document.getElementById(destination);
   // }, []);
 
-  const x = origin.position();
-  const y = origin.position();
-
   return (
-    <svg>
-      <line id="line1" />
-    </svg>
+    <>
+      <LineTo borderColor="red" from={origin} to={destination} />
+    </>
   );
 }
