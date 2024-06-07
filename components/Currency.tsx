@@ -4,6 +4,7 @@ import { SteppedLineTo } from "react-lineto";
 type CurrencyProps = {
   currency: string;
   amount: number;
+  otherClicked: boolean;
 };
 
 export default function Currency(props: CurrencyProps) {
@@ -25,6 +26,7 @@ export default function Currency(props: CurrencyProps) {
         to={props.currency}
         toAnchor="left"
         delay={true}
+        zIndex={clicked ? 100 : 1}
         orientation="h"
       />
     </div>

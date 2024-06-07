@@ -39,6 +39,7 @@ export default function Home() {
               id="fromValue"
             />
           </div>
+          <div className="ORIGIN"></div>
           <div className="flex flex-col gap-4">
             <Currency currency={"USD"} amount={fromValue} />
             <Currency currency={"EUR"} amount={fromValue} />
