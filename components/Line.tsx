@@ -11,7 +11,7 @@ export default function Line(origin: any, destination: any) {
 
   return (
     <svg>
-      <line id="line123" />
+      <line id="line1" />
     </svg>
   );
 }
