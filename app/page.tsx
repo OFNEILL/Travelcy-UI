@@ -28,7 +28,7 @@ export default function Home() {
           }}
         >
           <input
-            className="A"
+            className="text-white bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
             type="number"
             onChange={(e) => {
               setFromValue(parseInt(e.target.value));
