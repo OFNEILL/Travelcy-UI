@@ -45,6 +45,11 @@ export default function Home() {
             onChange={(e) => {
               setFromValue(parseInt(e.target.value));
             }}
+            onClick={() => {
+              setFromValue(0);
+              setToValue(0);
+              setChosen("");
+            }}
             placeholder="Enter starting amount"
             id="fromValue"
           />
