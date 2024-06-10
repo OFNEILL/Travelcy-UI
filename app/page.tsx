@@ -34,7 +34,8 @@ export default function Home() {
         <form
           className="gap-40 flex flex-row items-center"
           onSubmit={() => {
-            Convert(fromValue);
+            Convert();
+            console.log(toValue);
           }}
         >
           <input
@@ -52,24 +53,28 @@ export default function Home() {
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
+              Convert={Convert}
             />
             <Currency
               currency={"EUR"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
+              Convert={Convert}
             />
             <Currency
               currency={"AUS"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
+              Convert={Convert}
             />
             <Currency
               currency={"EGP"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
+              Convert={Convert}
             />
           </div>
           <input

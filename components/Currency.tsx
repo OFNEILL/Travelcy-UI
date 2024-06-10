@@ -6,22 +6,24 @@ type CurrencyProps = {
   amount: number;
   chosen: string;
   setChosen: any;
+  Convert: Function;
 };
 
 export default function Currency(props: CurrencyProps) {
   //methond that hits BE, passing currency and amount
   return (
     <div>
-      <span
+      <button
         className={`${props.currency} select-none cursor-pointer text-[#818181] plasmo-text-xl flex justify-center px-4 py-4 bg-[#38393c] rounded-lg`}
+        type="button"
         onClick={() =>
-          props.chosen !== props.currency
+          {props.chosen !== props.currency
             ? props.setChosen(props.currency)
-            : props.setChosen("")
+            : props.setChosen(""); props.Convert();}
         }
       >
         {props.currency}
-      </span>
+      </button>
 
       <SteppedLineTo
         borderColor={`${props.currency === props.chosen ? "white" : "#818181"} `}
