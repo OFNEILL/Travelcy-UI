@@ -17,6 +17,7 @@ export default function Home() {
 
   function Convert() {
     setToValue(fromValue * 2);
+    console.log(toValue);
   }
 
   return (
@@ -78,7 +79,7 @@ export default function Home() {
             />
           </div>
           <input
-            className="toValue cursor-copy bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
+            className="toValue bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
             type="number"
             disabled={true}
             value={`${toValue === 0 ? null : toValue}`}
