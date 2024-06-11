@@ -10,7 +10,8 @@ type ConvertProps = {
 };
 
 export default function Home() {
-  const fromRef = useRef(null);
+  const startRef = useRef(null);
+  const endRef = useRef(null);
   const [fromValue, setFromValue] = useState(0);
   const [chosen, setChosen] = useState("");
   const [toValue, setToValue] = useState(0);
@@ -19,6 +20,12 @@ export default function Home() {
     setToValue(fromValue * 2);
     console.log(toValue);
   }
+
+  useEffect(() => {
+    window.addEventListener("resize", (e: any) => {
+      window.location.reload();
+    });
+  });
 
   return (
     <main className="flex py-5 min-h-screen flex-col items-center">
@@ -52,6 +59,7 @@ export default function Home() {
             }}
             placeholder="Enter starting amount"
             id="fromValue"
+            ref={startRef}
           />
           <div className="flex flex-col gap-4">
             <Currency
@@ -90,6 +98,7 @@ export default function Home() {
             value={`${toValue === 0 ? null : toValue}`}
             placeholder="...."
             id="fromValue"
+            ref={endRef}
           />
         </form>
       </div>

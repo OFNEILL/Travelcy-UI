@@ -46,7 +46,7 @@ export default function Currency(props: CurrencyProps) {
         fromAnchor="right"
         to={props.currency}
         toAnchor="left"
-        delay={true}
+        delay={100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
         orientation="h"
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
@@ -57,7 +57,7 @@ export default function Currency(props: CurrencyProps) {
         fromAnchor="right"
         to="toValue"
         toAnchor="left"
-        delay={true}
+        delay={100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
         orientation="h"
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
