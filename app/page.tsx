@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Currency from "@/components/Currency";
+import { HandleConversion } from "@/services/handleConversion";
 
 type ConvertProps = {
   currency: string;
@@ -10,15 +11,25 @@ type ConvertProps = {
 };
 
 export default function Home() {
-  const fromRef = useRef(null);
+  const startRef = useRef(null);
+  const endRef = useRef(null);
   const [fromValue, setFromValue] = useState(0);
   const [chosen, setChosen] = useState("");
   const [toValue, setToValue] = useState(0);
 
   function Convert() {
     setToValue(fromValue * 2);
+    HandleConversion(fromValue, "EUR").then((res) => {
+      console.log(res);
+    });
     console.log(toValue);
   }
+
+  useEffect(() => {
+    window.addEventListener("resize", (e: any) => {
+      window.location.reload();
+    });
+  });
 
   return (
     <main className="flex py-5 min-h-screen flex-col items-center">
@@ -52,6 +63,7 @@ export default function Home() {
             }}
             placeholder="Enter starting amount"
             id="fromValue"
+            ref={startRef}
           />
           <div className="flex flex-col gap-4">
             <Currency
@@ -69,14 +81,21 @@ export default function Home() {
               Convert={Convert}
             />
             <Currency
-              currency={"AUS"}
+              currency={"BRL"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               Convert={Convert}
             />
             <Currency
-              currency={"EGP"}
+              currency={"JPY"}
+              amount={fromValue}
+              chosen={chosen}
+              setChosen={setChosen}
+              Convert={Convert}
+            />
+            <Currency
+              currency={"TRY"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
@@ -90,6 +109,7 @@ export default function Home() {
             value={`${toValue === 0 ? null : toValue}`}
             placeholder="...."
             id="fromValue"
+            ref={endRef}
           />
         </form>
       </div>
