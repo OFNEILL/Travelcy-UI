@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Currency from "@/components/Currency";
+import { HandleConversion } from "@/services/handleConversion";
 
 type ConvertProps = {
   currency: string;
@@ -18,6 +19,9 @@ export default function Home() {
 
   function Convert() {
     setToValue(fromValue * 2);
+    HandleConversion(fromValue, "EUR").then((res) => {
+      console.log(res);
+    });
     console.log(toValue);
   }
 
@@ -77,14 +81,21 @@ export default function Home() {
               Convert={Convert}
             />
             <Currency
-              currency={"AUS"}
+              currency={"BRL"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               Convert={Convert}
             />
             <Currency
-              currency={"EGP"}
+              currency={"JPY"}
+              amount={fromValue}
+              chosen={chosen}
+              setChosen={setChosen}
+              Convert={Convert}
+            />
+            <Currency
+              currency={"TRY"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
