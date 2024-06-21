@@ -1,7 +1,5 @@
-"use server";
-
 export async function HandleConversion(amount: number, currency: string) {
-  const url = `https://localhost:7297/conversion/HandleConversion?amount=${amount}&currency=${currency}`;
+  const url = `https://localhost:7297/conversion/HandleConversion?amount=${amount.toString()}&currency=${currency}`;
   console.log(url);
   const requestOptions: RequestInit = {
     method: "GET",
@@ -9,8 +7,11 @@ export async function HandleConversion(amount: number, currency: string) {
       "Content-Type": "application/json",
     },
   };
+  console.log(requestOptions);
+
   try {
-    const response = await fetch(url, requestOptions);
+    const response = await fetch(url, { cache: "no-cache" });
+    console.log(response);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
