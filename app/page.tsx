@@ -16,14 +16,20 @@ export default function Home() {
   const [fromValue, setFromValue] = useState(0);
   const [chosen, setChosen] = useState("");
   const [toValue, setToValue] = useState(0);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   function Convert() {
-    setToValue(fromValue * 2);
-    HandleConversion(fromValue, "EUR").then((res) => {
-      console.log(res);
+    HandleConversion(fromValue, chosen).then((res) => {
+      setToValue(res.convertedAmount);
     });
     console.log(toValue);
   }
+
+  useEffect(() => {
+    if (chosen !== "") {
+      Convert();
+    }
+  }, [chosen]);
 
   useEffect(() => {
     window.addEventListener("resize", (e: any) => {
@@ -43,13 +49,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-start align-start">
-        <form
-          className="gap-40 flex flex-row items-center"
-          onSubmit={() => {
-            Convert();
-            console.log(toValue);
-          }}
-        >
+        <form className="gap-40 flex items-center sm:flex-row flex-col">
           <input
             className="fromValue text-white bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
             type="number"
@@ -65,41 +65,41 @@ export default function Home() {
             id="fromValue"
             ref={startRef}
           />
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row sm:flex-col gap-4">
             <Currency
               currency={"USD"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
-              Convert={Convert}
+              screenSize={screenSize}
             />
             <Currency
               currency={"EUR"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
-              Convert={Convert}
+              screenSize={screenSize}
             />
             <Currency
               currency={"BRL"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
-              Convert={Convert}
+              screenSize={screenSize}
             />
             <Currency
               currency={"JPY"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
-              Convert={Convert}
+              screenSize={screenSize}
             />
             <Currency
               currency={"TRY"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
-              Convert={Convert}
+              screenSize={screenSize}
             />
           </div>
           <input
