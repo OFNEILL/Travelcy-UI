@@ -1,23 +1,30 @@
 export async function HandleConversion(amount: number, currency: string) {
-  const url = `https://localhost:7297/conversion/HandleConversion?amount=${amount.toString()}&currency=${currency}`;
-  console.log(url);
+  const url = `https://localhost:7297/conversion/HandleConversion?amount=${amount}&currency=${currency}`;
+  console.log("Request URL:", url);
+
   const requestOptions: RequestInit = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   };
-  console.log(requestOptions);
 
   try {
-    const response = await fetch(url, { cache: "no-cache" });
-    console.log(response);
+    const response = await fetch(url, requestOptions);
+    console.log("Request options:", requestOptions);
+
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    const responseData = await response.json();
-    console.log(responseData);
-    return responseData;
+
+    // Ensure the response is JSON
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      const responseData = await response.json();
+      return responseData;
+    } else {
+      throw new Error("Received response is not JSON");
+    }
   } catch (error) {
     console.error("Error occurred:", error);
     throw error;

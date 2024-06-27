@@ -6,7 +6,7 @@ type CurrencyProps = {
   amount: number;
   chosen: string;
   setChosen: any;
-  Convert: Function;
+  screenSize: any;
 };
 
 export default function Currency(props: CurrencyProps) {
@@ -21,6 +21,8 @@ export default function Currency(props: CurrencyProps) {
     }
   }, [props.amount]);
 
+  console.log(props.screenSize);
+
   return (
     <div>
       <button
@@ -29,9 +31,7 @@ export default function Currency(props: CurrencyProps) {
         onClick={() => {
           console.log(props.amount);
           if (amountSupplied && props.chosen !== props.currency) {
-            console.log(amountSupplied);
             props.setChosen(props.currency);
-            props.Convert();
           } else {
             props.setChosen("");
           }
@@ -43,23 +43,23 @@ export default function Currency(props: CurrencyProps) {
       <SteppedLineTo
         borderColor={`${!amountSupplied && props.currency === props.chosen ? "white" : "#818181"} `}
         from="fromValue"
-        fromAnchor="right"
+        fromAnchor={`${props.screenSize < 640 ? "bottom" : "right"}`}
         to={props.currency}
-        toAnchor="left"
+        toAnchor={`${props.screenSize < 640 ? "top" : "left"}`}
         delay={100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
-        orientation="h"
+        orientation={`${props.screenSize < 640 ? "v" : "h"}`}
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
       />
       <SteppedLineTo
         borderColor={`${!amountSupplied && props.currency === props.chosen ? "white" : "#818181"} `}
         from={props.currency}
-        fromAnchor="right"
+        fromAnchor={`${props.screenSize < 640 ? "bottom" : "right"}`}
         to="toValue"
-        toAnchor="left"
+        toAnchor={`${props.screenSize < 640 ? "top" : "left"}`}
         delay={100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
-        orientation="h"
+        orientation={`${props.screenSize < 640 ? "v" : "h"}`}
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
       />
     </div>
