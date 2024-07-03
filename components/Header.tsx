@@ -6,13 +6,6 @@ export default function Header() {
       <header className="text-4xl font-bold ">
         Travelcy - a new way to convert currency
       </header>
-      <div className="flex gap-2 px-4">
-        <Star size={35} fill={"white"} />
-        <Star size={35} />
-        <Star size={35} />
-        <Star size={35} />
-        <Star size={35} />
-      </div>
     </div>
   );
 }
