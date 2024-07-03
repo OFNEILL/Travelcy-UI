@@ -1,5 +1,5 @@
 export async function HandleConversion(amount: number, currency: string) {
-  const url = `https://localhost:7297/conversion/HandleConversion?amount=${amount}&currency=${currency}`;
+  const url = `https://travelcy.somee.com/travelcy-core/conversion/HandleConversion?amount=${amount}&currency=${currency}`;
   console.log("Request URL:", url);
 
   const requestOptions: RequestInit = {
