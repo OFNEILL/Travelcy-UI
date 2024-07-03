@@ -124,7 +124,7 @@ export default function Home() {
             className="toValue bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
             type="number"
             disabled={true}
-            value={`${toValue === 0 ? "" : toValue}`}
+            value={`${toValue !== 0 && toValue.toString().split(".")[1].length < 2 ? toValue.toString() + "0" : toValue !== 0 ? toValue : ""}`}
             placeholder="...."
             id="fromValue"
             ref={endRef}
