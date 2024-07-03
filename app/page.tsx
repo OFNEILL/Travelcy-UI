@@ -46,7 +46,6 @@ export default function Home() {
 
       window.addEventListener("resize", handleResize);
 
-      // Set initial screen size
       setScreenSize(window.innerWidth);
 
       // Cleanup event listener on unmount
