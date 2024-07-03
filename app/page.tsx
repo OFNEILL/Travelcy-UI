@@ -4,11 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Currency from "@/components/Currency";
 import { HandleConversion } from "@/services/handleConversion";
+import dynamic from "next/dynamic";
 
 type ConvertProps = {
   currency: string;
   amount: number;
 };
+
+const CurrencyItem = dynamic(() => import("@/components/Currency"), {
+  ssr: false,
+});
 
 export default function Home() {
   const startRef = useRef(null);
@@ -16,7 +21,7 @@ export default function Home() {
   const [fromValue, setFromValue] = useState(0);
   const [chosen, setChosen] = useState("");
   const [toValue, setToValue] = useState(0);
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const [screenSize, setScreenSize] = useState(0);
 
   function Convert() {
     HandleConversion(fromValue, chosen).then((res) => {
@@ -32,10 +37,24 @@ export default function Home() {
   }, [chosen]);
 
   useEffect(() => {
-    window.addEventListener("resize", (e: any) => {
-      window.location.reload();
-    });
-  });
+    // Only run this effect on the client
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setScreenSize(window.innerWidth);
+        window.location.reload();
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      // Set initial screen size
+      setScreenSize(window.innerWidth);
+
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
 
   return (
     <main className="flex py-5 min-h-screen flex-col items-center">
@@ -66,35 +85,35 @@ export default function Home() {
             ref={startRef}
           />
           <div className="flex flex-row sm:flex-col gap-4">
-            <Currency
+            <CurrencyItem
               currency={"USD"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               screenSize={screenSize}
             />
-            <Currency
+            <CurrencyItem
               currency={"EUR"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               screenSize={screenSize}
             />
-            <Currency
+            <CurrencyItem
               currency={"BRL"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               screenSize={screenSize}
             />
-            <Currency
+            <CurrencyItem
               currency={"JPY"}
               amount={fromValue}
               chosen={chosen}
               setChosen={setChosen}
               screenSize={screenSize}
             />
-            <Currency
+            <CurrencyItem
               currency={"TRY"}
               amount={fromValue}
               chosen={chosen}
@@ -106,7 +125,7 @@ export default function Home() {
             className="toValue bg-[#38393c] border-2 border-[#38393c] rounded-lg text-center p-2 focus:appearance-none focus:m-0 outline-none focus:border-[#818181]"
             type="number"
             disabled={true}
-            value={`${toValue === 0 ? null : toValue}`}
+            value={`${toValue === 0 ? "" : toValue}`}
             placeholder="...."
             id="fromValue"
             ref={endRef}
