@@ -41,7 +41,7 @@ export default function Home() {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setScreenSize(window.innerWidth);
-        window.location.reload();
+        // window.location.reload();
       };
 
       window.addEventListener("resize", handleResize);

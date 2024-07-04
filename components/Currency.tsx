@@ -46,7 +46,7 @@ export default function Currency(props: CurrencyProps) {
         fromAnchor={`${props.screenSize < 640 ? "bottom" : "right"}`}
         to={props.currency}
         toAnchor={`${props.screenSize < 640 ? "top" : "left"}`}
-        delay={100}
+        delay={props.screenSize < 640 ? true : 100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
         orientation={`${props.screenSize < 640 ? "v" : "h"}`}
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
@@ -57,7 +57,7 @@ export default function Currency(props: CurrencyProps) {
         fromAnchor={`${props.screenSize < 640 ? "bottom" : "right"}`}
         to="toValue"
         toAnchor={`${props.screenSize < 640 ? "top" : "left"}`}
-        delay={100}
+        delay={props.screenSize < 640 ? true : 100}
         zIndex={amountSupplied && props.chosen === props.currency ? 100 : 1}
         orientation={`${props.screenSize < 640 ? "v" : "h"}`}
         borderWidth={amountSupplied && props.chosen === props.currency ? 2 : 1}
